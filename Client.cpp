@@ -11,6 +11,32 @@
 
 #define MYPORT  7000
 #define BUFFER_SIZE 1024
+
+boolean login (string username, string password) {
+
+}
+
+boolean sendAll (string message) {
+
+}
+
+boolean sendAllFile (string fileName) {
+
+}
+
+boolean privateMessage (string username, string message) {
+
+}
+
+boolean privateMessageFile (string username, string file) {
+
+}
+
+void exit (){
+
+}
+
+
 int main()
 {
     int sock_cli;
