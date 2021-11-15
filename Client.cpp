@@ -1,10 +1,11 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <stdio.h>
+#include <string.h>
+#include <string>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <unistd.h>
-#include <string.h>
 #include <stdlib.h>
 #include <fcntl.h>
 #include <sys/shm.h>
@@ -12,30 +13,31 @@
 #define MYPORT  7000
 #define BUFFER_SIZE 1024
 
-boolean login (string username, string password) {
+using namespace std;
 
+bool login (string username, string password) {
+    return true;
 }
 
-boolean sendAll (string message) {
-
+bool sendAll (string message) {
+    return true;
 }
 
-boolean sendAllFile (string fileName) {
-
+bool sendAllFile (string fileName) {
+    return true;
 }
 
-boolean privateMessage (string username, string message) {
-
+bool privateMessage (string username, string message) {
+    return true;
 }
 
-boolean privateMessageFile (string username, string file) {
-
+bool privateMessageFile (string username, string file) {
+    return true;
 }
 
-void exit (){
-
+void exit(){
+    close(sock_cli);
 }
-
 
 int main()
 {
