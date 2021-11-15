@@ -1,5 +1,4 @@
 
-
 // compile:  g++ -pthread   ServerA.cpp -o Server
 
 #include <sys/types.h>
@@ -18,6 +17,19 @@
 
 #define PORT 7000
 #define IP "127.0.0.1"
+
+
+boolean sendTo (string message, string listUsers) {
+
+}
+
+boolean sendTo (string filename, string listUsers) {
+
+}
+
+void receive () {
+
+}
 
 int s;
 struct sockaddr_in servaddr;
