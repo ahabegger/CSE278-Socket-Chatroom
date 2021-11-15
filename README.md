@@ -1,6 +1,7 @@
 # CSE 278 Project
 
 Team Members : Alex Habegger (habeggaj) and Nathan Abdoo (abdoojm)
+
 Contact Email : habeggaj@miamioh.edu, abdoojm@miamioh.edu
 
 
