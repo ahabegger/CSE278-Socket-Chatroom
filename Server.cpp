@@ -18,13 +18,14 @@
 #define PORT 7000
 #define IP "127.0.0.1"
 
+using namespace std;
 
-boolean sendTo (string message, string listUsers) {
-
+bool sendTo (string message, string listUsers) {
+    return true;
 }
 
-boolean sendTo (string filename, string listUsers) {
-
+bool sendToFile (string filename, string listUsers) {
+    return true;
 }
 
 void receive () {
