@@ -54,23 +54,15 @@ bool checkLogin(string username, string password, int sock) {
     char buffer[1024] = {0};
     int  valread;
     
- 
     valread = read( sock , buffer, 1024);
-    if (valread>0)
-    {
-        cout<<buffer<<endl;
-    }
-        
-    
+
+    loginStatement = "";
 
     if(buffer[0] == 't') {
-        cout<<"true"<<endl;
         return true;
     } else {
-        cout<<"false"<<endl;
         return false;
     }
-
 }
 
 int main(int argc, char const *argv[])
