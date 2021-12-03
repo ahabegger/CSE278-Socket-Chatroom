@@ -30,7 +30,7 @@ void loginAttempt(char* loginInfo, int sock) {
 
     cout<<userInput<<endl;
 
-    string passInput = code.substr(code.find('_')+1);
+    string passInput = code.substr(code.find('_')+1, code.find('#') - code.find('_')-1);
 
     cout<<passInput<<endl;
 
@@ -56,6 +56,7 @@ void loginAttempt(char* loginInfo, int sock) {
     ssize_t lineSize = 0;
     lineSize = success.length();
     send(sock , line , lineSize , 0 );
+    memset(line, 0, success.length() * (sizeof line[0]));
 }
 
 void thread_Server(int Sock)
@@ -68,19 +69,15 @@ void thread_Server(int Sock)
         if (valread>0)
         {
             cout<<buffer<<endl;
-            if (buffer[0] == '/') {
-                if (buffer[1] == 'l') {
-                    loginAttempt(buffer, Sock);
+            if (buffer[0] == '/' && buffer[1] == 'l') {
+                loginAttempt(buffer, Sock);
+            } else {
+                for (int sockClient: Sockets)
+                {
+                    if (Sock==sockClient) continue;
+                    send(sockClient , buffer , valread , 0 );
                 }
             }
-
-
-            for (int sockClient: Sockets)
-            {
-                if (Sock==sockClient) continue;
-                send(sockClient , buffer , valread , 0 );
-            }
-            
         }
         
     }
@@ -92,7 +89,7 @@ void thread_Send(int sock)
     char *line = NULL;
     size_t len = 0;
     ssize_t lineSize = 0;
-    while (Working)
+    while (false)
     {
         lineSize = getline(&line, &len, stdin);
         send(sock , line , lineSize , 0 );
@@ -103,7 +100,7 @@ void thread_Receive(int Sock)
 {
     char buffer[1024] = {0};
     int  valread;
-    while (Working)
+    while (false)
     {
         valread = read( Sock , buffer, 1024);
         if (valread>0)
@@ -184,10 +181,10 @@ int main(int argc, char const *argv[])
             threads.push_back(thread(thread_Server,new_socket));
         }
 
-        thread Thread_Server_Obj(thread_Server,new_socket);
+        //thread Thread_Server_Obj(thread_Server,new_socket);
         //thread Thread_Receive_Obj(thread_Receive,new_socket);
         
-        Thread_Server_Obj.join();
+        //Thread_Server_Obj.join();
         //Thread_Receive_Obj.join();
     }
 
