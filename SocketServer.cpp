@@ -20,40 +20,6 @@ bool Working=true;
 vector<thread> threads;
 vector<int> Sockets;
 
-void thread_Server(int Sock)
-{
-    char buffer[1024] = {0};
-    int  valread;
-    while (Working)
-    {
-        valread = read( Sock , buffer, 1024);
-        if (valread>0)
-        {
-            //cout<<buffer<<endl;
-            for (int sockClient: Sockets)
-            {
-                if (Sock==sockClient) continue;
-                send(sockClient , buffer , valread , 0 );
-            }
-            
-        }
-        
-    }
-}
-
-void thread_Send(int sock)
-{
-    printf("Please enter a line:\n");
-    char *line = NULL;
-    size_t len = 0;
-    ssize_t lineSize = 0;
-    while (Working)
-    {
-        lineSize = getline(&line, &len, stdin);
-        send(sock , line , lineSize , 0 );
-    }  
-}
-
 void loginAttempt(char* loginInfo, int sock) {
     cout <<"login attempt"<<endl;
     cout<<loginInfo<<endl;
@@ -92,6 +58,46 @@ void loginAttempt(char* loginInfo, int sock) {
     send(sock , line , lineSize , 0 );
 }
 
+void thread_Server(int Sock)
+{
+    char buffer[1024] = {0};
+    int  valread;
+    while (Working)
+    {
+        valread = read( Sock , buffer, 1024);
+        if (valread>0)
+        {
+            cout<<buffer<<endl;
+            if (buffer[0] == '/') {
+                if (buffer[1] == 'l') {
+                    loginAttempt(buffer, Sock);
+                }
+            }
+
+
+            for (int sockClient: Sockets)
+            {
+                if (Sock==sockClient) continue;
+                send(sockClient , buffer , valread , 0 );
+            }
+            
+        }
+        
+    }
+}
+
+void thread_Send(int sock)
+{
+    printf("Please enter a line:\n");
+    char *line = NULL;
+    size_t len = 0;
+    ssize_t lineSize = 0;
+    while (Working)
+    {
+        lineSize = getline(&line, &len, stdin);
+        send(sock , line , lineSize , 0 );
+    }  
+}
 
 void thread_Receive(int Sock)
 {
@@ -137,7 +143,7 @@ int main(int argc, char const *argv[])
         exit(EXIT_FAILURE);
     }
     address.sin_family = AF_INET;
-    //address.sin_addr.s_addr = INADDR_ANY;//INADDR_ANY or INADDR_LOOPBACK
+    address.sin_addr.s_addr = INADDR_ANY; //INADDR_ANY or INADDR_LOOPBACK
     address.sin_port = htons( PORT );
 
 
@@ -162,6 +168,7 @@ int main(int argc, char const *argv[])
         perror("listen");
         exit(EXIT_FAILURE);
     }
+
     while (true)
     {
         if ((new_socket = accept(server_fd, (struct sockaddr *)&address, 
@@ -178,11 +185,12 @@ int main(int argc, char const *argv[])
         }
 
         thread Thread_Server_Obj(thread_Server,new_socket);
-        thread Thread_Receive_Obj(thread_Receive,new_socket);
+        //thread Thread_Receive_Obj(thread_Receive,new_socket);
         
         Thread_Server_Obj.join();
-        Thread_Receive_Obj.join();
+        //Thread_Receive_Obj.join();
     }
+
     for(auto& thread: threads)
         {
             thread.join();
