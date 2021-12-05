@@ -60,9 +60,7 @@ void thread_Send(int sock)
             }
 
             sline = "";
-        }
-
-        if(sline.at(0) == '/' && sline.at(1) == 'u') {
+        } else if(sline.at(0) == '/' && sline.at(1) == 'u') {
             string fileInfo = sline.substr(3);
             string userselect = fileInfo.substr(0, fileInfo.find(' '));
             string fileselect = fileInfo.substr(fileInfo.find(' ') + 1);
@@ -155,6 +153,7 @@ void thread_Receive(int Sock)
                     cout<<reline<<" (PM)"<<endl;
                 } 
             } else if ((reline.at(reline.find(':') + 2) == '/') && (command == 'u')) {
+                
                 string sender = reline.substr(0, reline.find(' '));
                 string nameFileText = reline.substr(reline.find('/')+3);
                 string reciever = nameFileText.substr(0, reline.find(' ')+1);
