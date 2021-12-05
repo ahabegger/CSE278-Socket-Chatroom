@@ -1,0 +1,16 @@
+Open Terminal
+mysql -u cse278 -p cse278
+Password : S3rul3z
+USE cse278;
+CREATE TABLE `LoginInfo` (
+  `Username` varchar(64) NOT NULL,
+  `Password` varchar(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO LoginInfo (Username, Password) VALUES ("bill", "3424");
+INSERT INTO LoginInfo (Username, Password) VALUES ("admin", "admin");
+INSERT INTO LoginInfo (Username, Password) VALUES ("tom", "win");
+INSERT INTO LoginInfo (Username, Password) VALUES ("alex", "it");
+INSERT INTO LoginInfo (Username, Password) VALUES ("bob", "123");
+INSERT INTO LoginInfo (Username, Password) VALUES ("nathan", "314");
+SELECT * FROM LoginInfo;
+
