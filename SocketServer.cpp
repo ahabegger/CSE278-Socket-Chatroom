@@ -23,31 +23,6 @@ vector<int> Sockets;
 void loginAttempt(char* loginInfo, int sock) {
     cout <<"login attempt"<<endl;
     cout<<loginInfo<<endl;
-// Server side C/C++ program to demonstrate Socket programming
-#define MYSQLPP_MYSQL_HEADERS_BURIED
-#include <mysql++/mysql++.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <sys/socket.h>
-#include <stdlib.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <string.h>
-#include <iostream>
-#include <thread>
-#include <vector>
-#define PORT 8080
-
-using namespace std;
-
-int CountClients=0;
-bool Working=true;
-vector<thread> threads;
-vector<int> Sockets;
-
-void loginAttempt(char* loginInfo, int sock) {
-    cout <<"login attempt"<<endl;
-    cout<<loginInfo<<endl;
 
     string code(loginInfo);
 
