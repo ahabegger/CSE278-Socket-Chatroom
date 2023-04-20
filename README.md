@@ -1,66 +1,35 @@
-# CSE 278 Project
+# CSE 278 Project: Chatting Room
 
-## CHATTING ROOM (2 PEOPLE REQUIREMENTS) REPORT
+## Overview
+This is a simple chat room project that allows two users to communicate with each other. The functionalities include user authentication, sending messages, and file sharing. This project is created by Alex Habegger and Nathan Abdoo for the CSE 278B Systems I class under the supervision of Professor Xianglong Feng.
 
-Team Members : Alex Habegger (habeggaj) and Nathan Abdoo (abdoojm)\
-Contact Email : habeggaj@miamioh.edu, abdoojm@miamioh.edu\
-Class : CSE 278B Systems I\
-Professor : Xianglong Feng
+## Features
+- User authentication (login check)
+- Free chatting (send and receive messages instantly)
+  - Send messages to all users (type message as normal)
+  - Send private messages to one user (`/p user message`)
+- File sharing
+  - Send files to all users (`/f file.txt`)
+  - Send files privately to one user (`/u user file.txt`)
+- Exit the client without using Ctrl + C (`/e` or `/exit`)
 
-## INCLUDED FUNCTIONALITIES
-
-- Login check
-- Chatting freely - Type anytime, receive messages instantly
-	- Send messages to all users - (Enter message as normal)
-	- Send message privately to one user - (/p user message)
-- Send files
-	- Send files to all users - (/f file.txt)
-	- Send file privately to one user - (/u user file.txt)
-- Exit client (without Ctrl + C) - (/e OR /exit)
-
-
-## FILES AND FUNCTIONS
-
+## Files and Functions
 ### SocketServer.cpp
-	- thread_server (int socket) 
-		- Check if received message is loginAttempt
-	- loginAttempt (char* loginInfo, int socket)
-		- SQL Query of Database
-	- thread_Send (int socket)
-	- thread_Receive (int socket)
-		- Check if received message is loginAttempt
-	- int main (int argc, char const *argv[])
-		- Creates Threads
+- `thread_server(int socket)`: Checks if the received message is a loginAttempt.
+- `loginAttempt(char* loginInfo, int socket)`: Performs an SQL query on the database to check login credentials.
+- `thread_Send(int socket)`: Sends messages to clients.
+- `thread_Receive(int socket)`: Receives messages from clients and checks if the received message is a loginAttempt.
+- `int main(int argc, char const *argv[])`: Creates threads for handling client connections.
+
 ### SocketClient.cpp
-	- thread_Send (int socket)
-		- Checks for /e or /exit
-			- Exits the client
-		- Checks for /f file.txt 
-			- Checks if file.txt exists
-			- Reads file.txt 
-			- Sends file.txt and usertitle to Server
-		- Checks for /u targetUser file.txt   
-			- Checks if file.txt exists
-			- Reads file.txt 
-			- Sends file.txt and usertitle and targetUser to Server
-	- thread_Receive (int socket)
-		- Checks for /f file.txt 
-			- Creates file.txt
-			- Prints file sent message
-		- Checks for /u targetUser file.txt   
-			- Checks if targetUser = usertitle
-			- Creates file.txt if true 
-			- Prints file sent message with “(PM)” if true
-		- Checks for /p targetUser 
-			- Checks if targetUser = usertitle
-			- Prints message plus “(PM)” if true
-	- checkLogin (string username, string password, int socket)
-		- Sends loginAttempt to Server using /login-Username_Password#
-			- Creates usertitle to username 
-	- main (int argc, char const *argv[])
-		- Creates a checkLogin Loop
-		- Creates Send and Receive Threads
+- `thread_Send(int socket)`: Handles sending messages and files, as well as exiting the client.
+- `thread_Receive(int socket)`: Handles receiving messages and files from other users.
+- `checkLogin(string username, string password, int socket)`: Sends loginAttempt to the server and sets the user title.
+- `main(int argc, char const *argv[])`: Handles the login loop and creates send and receive threads.
+
 ### Makefile
-	- Compiles both the SocketServer.cppp and SocketClient.cpp
+- Compiles both SocketServer.cpp and SocketClient.cpp.
 
-
+## Contact Information
+- Team Members: Alex Habegger (habeggaj) and Nathan Abdoo (abdoojm)
+- Contact Emails: habeggaj@miamioh.edu, abdoojm@miamioh.edu
