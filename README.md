@@ -1,13 +1,13 @@
 # CSE 278 Project
 
-CHATTING ROOM (2 PEOPLE REQUIREMENTS) REPORT
+## CHATTING ROOM (2 PEOPLE REQUIREMENTS) REPORT
 
 Team Members : Alex Habegger (habeggaj) and Nathan Abdoo (abdoojm)\
 Contact Email : habeggaj@miamioh.edu, abdoojm@miamioh.edu\
 Class : CSE 278B Systems I\
 Professor : Xianglong Feng
 
-INCLUDED FUNCTIONALITIES
+## INCLUDED FUNCTIONALITIES
 
 - Login check
 - Chatting freely - Type anytime, receive messages instantly
@@ -19,9 +19,9 @@ INCLUDED FUNCTIONALITIES
 - Exit client (without Ctrl + C) - (/e OR /exit)
 
 
-FILES AND FUNCTIONS
+## FILES AND FUNCTIONS
 
-1. SocketServer.cpp
+### SocketServer.cpp
 	- thread_server (int socket) 
 		- Check if received message is loginAttempt
 	- loginAttempt (char* loginInfo, int socket)
@@ -31,7 +31,7 @@ FILES AND FUNCTIONS
 		- Check if received message is loginAttempt
 	- int main (int argc, char const *argv[])
 		- Creates Threads
-2. SocketClient.cpp
+### SocketClient.cpp
 	- thread_Send (int socket)
 		- Checks for /e or /exit
 			- Exits the client
@@ -60,7 +60,7 @@ FILES AND FUNCTIONS
 	- main (int argc, char const *argv[])
 		- Creates a checkLogin Loop
 		- Creates Send and Receive Threads
-3. Makefile
+### Makefile
 	- Compiles both the SocketServer.cppp and SocketClient.cpp
 
 
